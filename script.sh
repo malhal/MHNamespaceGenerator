@@ -1,11 +1,25 @@
-# This script is a modified version of this: https://github.com/jverkoey/nimbus/blob/master/scripts/generate_namespace_header
-# The first uniq optimises for when its a universal binary. The final uniq prevents dup defines when there are methods with same name but different params.
+#
+#  script.sh
+#  MHNamespaceGenerator
+#
+#  Created by Malcolm Hall on 31/07/2016.
+#  Copyright © 2016 Malcolm Hall. All rights reserved.
+#
+#  Usage:
+#  Add a dependency to this git.
+#      E.g. git submodule add https://github.com/malhal/MHNamespaceGenerator.git dependencies/MHNamespaceGenerator
+#  Add a new run script phase to your framework project and in the second box enter the path to this script with the name and the prefix as params.
+#      E.g. dependencies/MHNamespaceGenerator/script.sh MHCloudKit MHCK
+#
+#  This script is a modified version of this: https://github.com/jverkoey/nimbus/blob/master/scripts/generate_namespace_header
+#  The first uniq optimises for when its a universal binary. The final uniq prevents dup defines when there are methods with same name but different params.
 
-name="MHCloudKit"
-upperName="MHCLOUDKIT"
-prefix="MHCK"
-lowerPrefix="mhck"
-filename=${prefix}NamespaceDefines.h
+name=$1
+upperName="$(echo $name | tr '[a-z]' '[A-Z]')"
+prefix=$2
+lowerPrefix="$(echo $prefix | tr '[A-Z]' '[a-z]')"
+
+filename=${prefix}Defines+Namespace.h
 header=$SRCROOT/$name/$filename
 binary=$CODESIGNING_FOLDER_PATH/$name
 
@@ -14,9 +28,8 @@ echo "Generating $header from $binary..."
 echo "//
 //  $filename
 //  $name
-//
-//  Auto-generated using script created by Malcolm Hall on 30/07/2016.
-//  Copyright © 2016 Malcolm Hall. All rights reserved.
+//  $upperName
+//  Auto-generated using MHNamespaceGenerator
 //
 
 #if !defined(__${upperName}_NS_SYMBOL) && defined(${upperName}_NAMESPACE)
