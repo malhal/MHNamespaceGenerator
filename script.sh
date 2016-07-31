@@ -22,14 +22,15 @@ lowerPrefix="$(echo $prefix | tr '[A-Z]' '[a-z]')"
 filename=${prefix}Defines+Namespace.h
 header=$SRCROOT/$name/$filename
 binary=$CODESIGNING_FOLDER_PATH/$name
+now=$(date +"%d/%m/%Y")
 
 echo "Generating $header from $binary..."
 
 echo "//
 //  $filename
 //  $name
-//  $upperName
-//  Auto-generated using MHNamespaceGenerator
+//
+//  Generated using MHNamespaceGenerator on $now
 //
 
 #if !defined(__${upperName}_NS_SYMBOL) && defined(${upperName}_NAMESPACE)
