@@ -14,14 +14,15 @@
 #  This script is a modified version of this: https://github.com/jverkoey/nimbus/blob/master/scripts/generate_namespace_header
 #  The first uniq optimises for when its a universal binary. The final uniq prevents dup defines when there are methods with same name but different params.
 
-name=$1
+product=$1
+name=$2
 upperName="$(echo $name | tr '[a-z]' '[A-Z]')"
-prefix=$2
+prefix=$3
 lowerPrefix="$(echo $prefix | tr '[A-Z]' '[a-z]')"
 
 filename=${prefix}NamespaceDefines.h
 header=$SRCROOT/$name/$filename
-binary=$CODESIGNING_FOLDER_PATH/$name
+binary=$CODESIGNING_FOLDER_PATH$product/$name
 now=$(date +"%d/%m/%Y")
 
 echo "Generating $header from $binary..."
