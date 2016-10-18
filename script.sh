@@ -20,7 +20,7 @@ upperName="$(echo $name | tr '[a-z]' '[A-Z]')"
 prefix=$3
 lowerPrefix="$(echo $prefix | tr '[A-Z]' '[a-z]')"
 
-filename=${prefix}NamespaceDefines.h
+filename=${prefix}Defines+Namespace.h
 header=$SRCROOT/$name/$filename
 binary=$CODESIGNING_FOLDER_PATH$product/$name
 now=$(date +"%d/%m/%Y")
