@@ -40,7 +40,7 @@ echo "//
 #if !defined(__${upperName}_NAMESPACE_APPLY) && defined(${upperName}_NAMESPACE) && defined(${upperName}_NAMESPACE_LOWER)
     #define __${upperName}_NAMESPACE_REWRITE(ns, s) ns ## _ ## s
     #define __${upperName}_NAMESPACE_BRIDGE(ns, s) __${upperName}_NAMESPACE_REWRITE(ns, s)
-    #define __${upperName}_NAMESPACE_APPLY(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE, s)" > $header
+    #define __${upperName}_NAMESPACE_APPLY(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE, s)
 	#define __${upperName}_NAMESPACE_LOWER_APPLY(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE_LOWER, s)" > $header
 
 echo "// Classes" >> $header
