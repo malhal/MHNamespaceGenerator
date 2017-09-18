@@ -41,11 +41,11 @@ echo "//
 
 echo "// Classes" >> $header
 
-nm $binary -j | sort | uniq | grep "^_OBJC_CLASS_\$_$prefix" | sed -e "s/_OBJC_CLASS_\$_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" >> $header
+nm "$binary" -j | sort | uniq | grep "^_OBJC_CLASS_\$_$prefix" | sed -e "s/_OBJC_CLASS_\$_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" >> $header
 
 echo "// Categories" >> $header
 
-nm $binary -j | sort | uniq | grep "^[+-]\[.*($prefix) ${lowerPrefix}_" | sed -e "s/[+-]\[.*($prefix) \(${lowerPrefix}_[a-zA-Z]*\).*/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" | sort | uniq >> $header
+nm "$binary" -j | sort | uniq | grep "^[+-]\[.*($prefix) ${lowerPrefix}_" | sed -e "s/[+-]\[.*($prefix) \(${lowerPrefix}_[a-zA-Z]*\).*/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" | sort | uniq >> $header
 
 #echo "// Functions" >> $header
 
@@ -55,7 +55,7 @@ echo "// Externs" >> $header
 
 #nm $CODESIGNING_FOLDER_PATH | sort | uniq | grep " D " | cut -d' ' -f3 | sed -e 's/_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)''/g' >> $header
 
-nm $binary | sort | uniq | grep " S _\($prefix\|$name\)" | cut -d' ' -f3 | sed "/${name}VersionNumber/d" | sed "/${name}VersionString/d" | sed -e "s/_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" | sort | uniq >> $header
+nm "$binary" | sort | uniq | grep " S _\($prefix\|$name\)" | cut -d' ' -f3 | sed "/${name}VersionNumber/d" | sed "/${name}VersionString/d" | sed -e "s/_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)/g" | sort | uniq >> $header
 
 echo "#endif" >> $header
 #echo "#import <$name/$name.h>" >> $header
