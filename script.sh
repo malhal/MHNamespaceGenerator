@@ -48,7 +48,7 @@ echo "// Classes" >> $header
 nm "$binary" -j | sort | uniq | grep "^_OBJC_CLASS_\$_$prefix" | sed -e "s/_OBJC_CLASS_\$_\(.*\)/    #define \1 __${upperName}_NAMESPACE_APPLY(\1)/g" >> $header
 
 echo "// Categories
-    #define ${prefix} ${upperName}_NAMESPACE_APPLY(${prefix})" >> $header
+    #define ${prefix} __${upperName}_NAMESPACE_APPLY(${prefix})" >> $header
 
 nm "$binary" -j | sort | uniq | grep "^[+-]\[.*($prefix) ${lowerPrefix}_" | sed -e "s/[+-]\[.*($prefix) \(${lowerPrefix}_[a-zA-Z]*\).*/    #define \1 __${upperName}_NAMESPACE_APPLY_LOWER(\1)/g" | sort | uniq >> $header
 
