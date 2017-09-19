@@ -60,7 +60,7 @@ echo "// Externs" >> $header
 
 #nm $CODESIGNING_FOLDER_PATH | sort | uniq | grep " D " | cut -d' ' -f3 | sed -e 's/_\(.*\)/    #define \1 __${upperName}_NS_SYMBOL(\1)''/g' >> $header
 
-nm "$binary" | sort | uniq | grep " S _\($prefix\|$name\)" | cut -d' ' -f3 | sed "/${name}VersionNumber/d" | sed "/${name}VersionString/d" | sed -e "s/_\(.*\)/    #define \1 __${upperName}_NAMESPACE_APPLY(\1)/g" | sort | uniq >> $header
+nm "$binary" | sort | uniq | grep " [TS] _\($prefix\|$name\)" | cut -d' ' -f3 | sed "/${name}VersionNumber/d" | sed "/${name}VersionString/d" | sed -e "s/_\(.*\)/    #define \1 __${upperName}_NAMESPACE_APPLY(\1)/g" | sort | uniq >> $header
 
 echo "#endif" >> $header
 #echo "#import <$name/$name.h>" >> $header
