@@ -41,7 +41,7 @@ echo "//
     #define __${upperName}_NAMESPACE_REWRITE(ns, s) ns ## _ ## s
     #define __${upperName}_NAMESPACE_BRIDGE(ns, s) __${upperName}_NAMESPACE_REWRITE(ns, s)
     #define __${upperName}_NAMESPACE_APPLY(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE, s)
-	#define __${upperName}_NAMESPACE_LOWER_APPLY(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE_LOWER, s)" > $header
+	#define __${upperName}_NAMESPACE_APPLY_LOWER(s) __${upperName}_NAMESPACE_BRIDGE(${upperName}_NAMESPACE_LOWER, s)" > $header
 
 echo "// Classes" >> $header
 
